@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/your-username/temp-converter.git'
+                git 'https://github.com/LaksyaBisht/DevOpsProject.git'
             }
         }
         stage('Build Docker Image') {
@@ -17,7 +17,6 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    // Stop and remove old container if exists
                     sh 'docker rm -f temp-converter || true'
                     sh 'docker run -d -p 5000:5000 --name temp-converter temp-converter'
                 }
