@@ -5,7 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t temp-converter .'
+                    bat 'docker build -t temp-converter .'
                 }
             }
         }
@@ -13,8 +13,9 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh 'docker rm -f temp-converter || true'
-                    sh 'docker run -d -p 5000:5000 --name temp-converter temp-converter'
+                    // Use double quotes for Windows cmd
+                    bat 'docker rm -f temp-converter || exit 0'
+                    bat 'docker run -d -p 5000:5000 --name temp-converter temp-converter'
                 }
             }
         }
